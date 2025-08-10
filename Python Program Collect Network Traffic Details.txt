@@ -1,0 +1,56 @@
+Python program that collects basic network traffic details relevant to the features you listed earlier for intrusion detection. This version uses psutil and socket to gather system-level network statistics. For deeper packet-level inspection, tools like scapy or pyshark would be needed—but this gives you a solid starting point
+
+
+What This Captures:
+- src_bytes and dst_bytes: Total bytes sent/received
+- Active TCP/UDP connections
+- Local and remote IP/port info
+- Hostname and IP address
+- Simulated values for duration, protocol_type, service, and flag
+
+
+
+
+------------------------------------------------------------------------
+import psutil
+import socket
+import time
+
+def collect_network_details():
+    print("\n📡 Network Traffic Snapshot")
+
+    # 1. Basic connection stats
+    net_io = psutil.net_io_counters()
+    print(f"Bytes Sent (src_bytes): {net_io.bytes_sent}")
+    print(f"Bytes Received (dst_bytes): {net_io.bytes_recv}")
+
+    # 2. Active connections
+    connections = psutil.net_connections(kind='inet')
+    print(f"Active Connections: {len(connections)}")
+
+    for conn in connections[:5]:  # Show first 5 for brevity
+        laddr = f"{conn.laddr.ip}:{conn.laddr.port}" if conn.laddr else "N/A"
+        raddr = f"{conn.raddr.ip}:{conn.raddr.port}" if conn.raddr else "N/A"
+        print(f"  Protocol: {conn.type}, Status: {conn.status}")
+        print(f"  Local Address: {laddr}, Remote Address: {raddr}")
+
+    # 3. Hostname and IP
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    print(f"Host: {hostname}, IP: {ip_address}")
+
+    # 4. Duration placeholder (for real-time tracking)
+    duration = 1  # Simulated duration in seconds
+    print(f"Connection Duration: {duration} sec")
+
+    # 5. Protocol type (simplified)
+    print("Protocol Type: TCP (assumed)")
+
+    # 6. Service and flag placeholders
+    print("Service: HTTP (simulated)")
+    print("Flag: SF (simulated)")
+
+if __name__ == "__main__":
+    while True:
+        collect_network_details()
+        time.sleep(10)  # Refresh every 10 seconds
