@@ -5,6 +5,7 @@ Approach Highlights
 Data-Driven Pipeline – From CSV ingestion to model deployment using IBM watsonx.ai and Watson Machine Learning.
 Automated Model Optimization – AutoAI selects, tunes, and ranks algorithms for best accuracy.
 Scalable Deployment – REST API integration (future) for live classification and monitoring.
+
 Methodology
 Data Preparation – Load and preprocess network traffic CSV files.
 Model Building – Use AutoAI to train, evaluate, and select the best-performing model.
